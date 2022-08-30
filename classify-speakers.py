@@ -2,27 +2,10 @@
 """Filters the speakers of crawled sessions into Parliament members and guests."""
 from argparse import ArgumentParser
 from utils.loggingutils import configure_logging
-from pathlib import Path
+from utils.sessionutils import load_speakers
+from utils.dataframeutils import save_data_frame
 import logging
-import json
-import csv
 import pandas as pd
-
-
-def save_data_frame(data_frame, file_name):
-    """Save the provided data frame into specified CSV file.
-
-    Parameters
-    ----------
-    data_frame: pandas.DataFrame, required
-        The data frame to save.
-    file_name: str, required
-        The path of the CSV file where to save the data frame.
-    """
-    output_file = Path(file_name)
-    if not output_file.parent.exists():
-        output_file.parent.mkdir(parents=True, exist_ok=True)
-    data_frame.to_csv(file_name, quoting=csv.QUOTE_NONNUMERIC)
 
 
 def is_guest(speaker):
